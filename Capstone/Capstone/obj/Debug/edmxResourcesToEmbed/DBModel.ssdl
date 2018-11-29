@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CapstoneModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CapstoneModelStoreContainer">
+    <EntitySet Name="Students" EntityType="CapstoneModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Programs" EntityType="CapstoneModel.Store.Programs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Favourite" EntityType="CapstoneModel.Store.Favourite" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Favourite_Student" Association="CapstoneModel.Store.FK_Favourite_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_Program" Association="CapstoneModel.Store.FK_Favourite_Program">
+      <End Role="Program" EntitySet="Programs" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Programs">
+    <Key>
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="pId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProgranName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prerequisites" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ouac" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MinGrade" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="School" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Favourite">
+    <Key>
+      <PropertyRef Name="Students_Id" />
+      <PropertyRef Name="Programs_pId" />
+    </Key>
+    <Property Name="Students_Id" Type="int" Nullable="false" />
+    <Property Name="Programs_pId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Favourite_Student">
+    <End Role="Student" Type="CapstoneModel.Store.Students" Multiplicity="1" />
+    <End Role="Favourite" Type="CapstoneModel.Store.Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="Students_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_Program">
+    <End Role="Favourite" Type="CapstoneModel.Store.Favourite" Multiplicity="*" />
+    <End Role="Program" Type="CapstoneModel.Store.Programs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="pId" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="Programs_pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

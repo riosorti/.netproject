@@ -1,0 +1,58 @@
+﻿@model Capstone.Program
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Program</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgranName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgranName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prerequisites)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prerequisites)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ouac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ouac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.School)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.School)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.pId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,15 @@
+﻿@model Capstone.Models.ReportViewModel
+@{
+    ViewBag.Title = "Student";
+    Layout = null;
+}
+
+<h2>Student</h2>
+
+@using (Html.BeginForm("Student", "Programs", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.id)
+    
+    <input type="submit" />
+}
+

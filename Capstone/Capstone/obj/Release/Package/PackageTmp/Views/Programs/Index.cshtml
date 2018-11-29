@@ -1,0 +1,66 @@
+﻿
+
+@model IEnumerable<Capstone.Program>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{var bar = Request.Form["studentID"]; }
+<h2>Index</h2>
+@*<p><a href="https://educounsellorteam.azurewebsites.net/Favourites" class="btn btn-primary btn-lg">View Favourites &raquo;</a></p>*@
+@using (Html.BeginForm("Fav", "Programs", FormMethod.Post))
+{
+    <button name="Fav" type="submit" value="Fav" class="btn btn-default">Favourites</button>
+}
+
+<span>Hello :  @(bar)</span>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgranName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prerequisites)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ouac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.School)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgranName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prerequisites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ouac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.School)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.pId }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.pId }) |
+                @Html.ActionLink("Add to Favourites", "AddFavourite", new { id = item.pId })
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.pId })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.Raw(TempData["msg"])
